@@ -6,6 +6,15 @@ Future<dynamic> requestGet(String url) async {
   if (response.statusCode == 200) {
     return json.decode(response.body);
   } else {
-    throw Exception('Request Error. Url : $url,code:${response.statusCode}');
+    throw Exception('Sorry, something went wrong!');
+  }
+}
+
+Future<dynamic> requestPost(String author, String message) async {
+  if (author.isNotEmpty && message.isNotEmpty) {
+    await http.post(
+      Uri.parse('http://146.185.154.90:8000/messages'),
+      body: {'author': author, 'message': message},
+    );
   }
 }
